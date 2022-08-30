@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostPost;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -37,11 +38,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostPost $request)
     {
-       dd($request);
-        
-        //
+
+
+    echo"El titulo trae ".$request->title;
+
+    Post::create($request->validated());
+    return back()->with('status','Muchas gracias tu post fue creado con éxito');
+    //return redirect('post.create')->with('status','Post created');
     }
 
     /**
